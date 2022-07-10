@@ -1,5 +1,6 @@
 import cx from 'classnames'
 import { DOTS } from '@hooks/common.hook'
+import { ChevronLeft, ChevronRight } from '@components/common/Icons'
 
 interface IPaginationProps {
   paginationRange: (number | string)[] | undefined
@@ -34,26 +35,16 @@ export function Pagination({
         )}
         onClick={onPrevious}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
+        <ChevronLeft />
       </li>
       {paginationRange &&
-        paginationRange?.map((pageNumber: number | string) => {
+        paginationRange?.map((pageNumber: number | string, index: number) => {
           if (pageNumber === DOTS) {
             return (
-              <li className="px-3 h-8 text-center my-auto mx-1 flex items-center rounded-2xl text-sm min-w-8 dots">
+              <li
+                key={`${pageNumber}-${index}`}
+                className="px-3 h-8 text-center my-auto mx-1 flex items-center rounded-2xl text-sm min-w-8 dots"
+              >
                 &#8230;
               </li>
             )
@@ -61,6 +52,7 @@ export function Pagination({
 
           return (
             <li
+              key={`${pageNumber}-${index}`}
               className={cx(
                 'px-3 h-8 text-center my-auto mx-1 flex items-center rounded-2xl text-sm min-w-8 cursor-pointer',
                 pageNumber === currentPage && 'bg-primary-purple text-white'
@@ -78,16 +70,7 @@ export function Pagination({
         )}
         onClick={onNext}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
+        <ChevronRight />
       </li>
     </ul>
   )

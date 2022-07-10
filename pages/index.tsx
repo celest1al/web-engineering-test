@@ -22,10 +22,12 @@ const Home: NextPage = () => {
     paginationRange,
     keyword,
     gender,
+    sort,
     onChangeKeyword,
     onChangeGender,
     onChangePage,
     onResetKeyword,
+    onChangeSort,
     onResetFilter,
   } = useUserList()
 
@@ -62,7 +64,7 @@ const Home: NextPage = () => {
             Clear Filter
           </button>
         </div>
-        <Table users={results} />
+        <Table users={results} sort={sort} onChangeSort={onChangeSort} />
         <Pagination
           paginationRange={paginationRange}
           currentPage={page}

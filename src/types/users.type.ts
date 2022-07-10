@@ -1,8 +1,14 @@
-export type Gender = 'all' | 'male' | 'female'
+export type TGender = 'all' | 'male' | 'female'
+export type TSortOrder = 'ascend' | 'descend'
+export type TSortBy = 'username' | 'email' | 'gender' | 'registered'
 
+export type ISort = {
+  sortBy: null | TSortBy
+  sortOrder: null | TSortOrder
+}
 export interface IUser {
   email: string
-  gender: Gender
+  gender: TGender
   login: {
     md5: string
     password: string

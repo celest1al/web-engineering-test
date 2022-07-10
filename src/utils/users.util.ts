@@ -1,11 +1,11 @@
 import qs from 'query-string'
-import { Gender } from 'src/types/users.type'
+import { TGender } from 'src/types/users.type'
 
 interface IGetRandomUsers {
   page: number
   results?: number
   filters: {
-    gender: Gender
+    gender: TGender
     keyword: string
   }
 }

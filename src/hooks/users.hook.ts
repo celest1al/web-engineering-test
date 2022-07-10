@@ -1,33 +1,51 @@
 import { useQuery } from 'react-query'
 import { useState } from 'react'
 
-import { Gender } from 'src/types/users.type'
+import { ISort, TGender } from 'src/types/users.type'
 import { getRandomUsers } from '@utils/users.util'
 import { usePagination, useDebounce } from './common.hook'
 
 interface IUseRandomUserProps {
   page: number
   keyword: string
-  gender: Gender
+  gender: TGender
+  sort: ISort
 }
 
-export function useRandomUser({ page, keyword, gender }: IUseRandomUserProps) {
+export function useRandomUser({
+  page,
+  keyword,
+  gender,
+  sort,
+}: IUseRandomUserProps) {
   return useQuery(
-    ['random-users', { page, keyword, gender }],
+    [
+      'random-users',
+      {
+        page,
+        keyword,
+        gender,
+      },
+    ],
     () => getRandomUsers({ page, filters: { gender, keyword } }),
     { keepPreviousData: true, staleTime: 5 * 60 * 1000 }
   )
 }
 
 export function useUserList() {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
   const [keyword, setKeyword] = useState('')
-  const [gender, setGender] = useState<Gender>('all')
+  const [gender, setGender] = useState<TGender>('all')
+  const [sort, setSort] = useState<ISort>({
+    sortOrder: null,
+    sortBy: null,
+  })
   const delayedKeyword = useDebounce({ value: keyword, delay: 500 })
   const { data } = useRandomUser({
     page: page,
     keyword: delayedKeyword,
     gender: gender,
+    sort,
   })
   const paginationRange = usePagination({
     currentPage: page,
@@ -38,7 +56,15 @@ export function useUserList() {
   }
 
   const onChangeGender = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setGender(event?.target?.value as Gender)
+    setGender(event?.target?.value as TGender)
+  }
+
+  const onChangeSort = (sort: ISort) => {
+    setSort((prevState) => ({
+      ...prevState,
+      sortBy: sort.sortBy,
+      sortOrder: sort.sortOrder,
+    }))
   }
 
   const onResetKeyword = () => {
@@ -58,12 +84,14 @@ export function useUserList() {
     page,
     keyword,
     gender,
+    sort,
     results: data?.results,
     paginationRange,
     onChangeKeyword,
     onChangeGender,
+    onChangeSort,
     onResetFilter,
     onResetKeyword,
-    onChangePage
+    onChangePage,
   }
 }
