@@ -1,11 +1,5 @@
 export type TGender = 'all' | 'male' | 'female'
-export type TSortOrder = 'ascend' | 'descend'
-export type TSortBy = 'username' | 'email' | 'gender' | 'registered'
 
-export type ISort = {
-  sortBy: null | TSortBy
-  sortOrder: null | TSortOrder
-}
 export interface IUser {
   email: string
   gender: TGender

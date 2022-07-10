@@ -1,29 +1,19 @@
 import dayjs from 'dayjs'
 import cx from 'classnames'
 
-import { ChevronDownSolid, ChevronUpSolid } from '@components/common/Icons'
-import { ISort, IUser, TSortBy } from 'src/types/users.type'
+import {
+  ChevronDownSolid,
+  ChevronUpSolid,
+} from '@components/icons/icons.component'
+import { IUser } from '@features/users-list/users-list.type'
+import { ISort } from './users-list-table.type'
+import { headerList } from './users-list-table.constant'
 
 interface ITableProps {
   users: IUser[]
   sort: ISort
   onChangeSort: (sort: ISort) => void
 }
-
-interface IHeaderList {
-  id: number
-  label: string
-  value: TSortBy | null
-  sortable: boolean
-}
-
-const headerList: IHeaderList[] = [
-  { id: 1, label: 'Name', value: null, sortable: false },
-  { id: 2, label: 'Username', value: 'username', sortable: true },
-  { id: 3, label: 'Email', value: 'email', sortable: true },
-  { id: 4, label: 'Gender', value: 'gender', sortable: true },
-  { id: 5, label: 'Registered Date', value: 'registered', sortable: true },
-]
 
 export function Table({ users, sort, onChangeSort }: ITableProps): JSX.Element {
   const sortedUsers = users?.sort((a, b): any => {
@@ -66,7 +56,7 @@ export function Table({ users, sort, onChangeSort }: ITableProps): JSX.Element {
                           'cursor-pointer',
                           sort?.sortBy === header?.value &&
                             sort?.sortOrder === 'ascend' &&
-                            'text-primary-purple'
+                            'text-primary-red'
                         )}
                         onClick={() =>
                           onChangeSort({
@@ -82,7 +72,7 @@ export function Table({ users, sort, onChangeSort }: ITableProps): JSX.Element {
                           'cursor-pointer',
                           sort?.sortBy === header?.value &&
                             sort?.sortOrder === 'descend' &&
-                            'text-primary-purple'
+                            'text-primary-red'
                         )}
                         onClick={() =>
                           onChangeSort({

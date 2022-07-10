@@ -1,5 +1,5 @@
 import qs from 'query-string'
-import { TGender } from 'src/types/users.type'
+import { TGender } from './users-list.type'
 
 interface IGetRandomUsers {
   page: number

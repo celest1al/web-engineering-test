@@ -1,9 +1,11 @@
 import { useQuery } from 'react-query'
 import { useState } from 'react'
 
-import { ISort, TGender } from 'src/types/users.type'
-import { getRandomUsers } from '@utils/users.util'
-import { usePagination, useDebounce } from './common.hook'
+import { TGender } from './users-list.type'
+import { ISort } from './table/users-list-table.type'
+import { getRandomUsers } from './users-list.util'
+import { usePagination } from './pagination/users-list-pagination.hook'
+import { useDebounce } from '@hooks/use-debounce/use-debounce.hook'
 
 interface IUseRandomUserProps {
   page: number

@@ -1,6 +1,6 @@
 import cx from 'classnames'
-import { DOTS } from '@hooks/common.hook'
-import { ChevronLeft, ChevronRight } from '@components/common/Icons'
+import { DOTS } from './users-list-pagination.hook'
+import { ChevronLeft, ChevronRight } from '@components/icons/icons.component'
 
 interface IPaginationProps {
   paginationRange: (number | string)[] | undefined
