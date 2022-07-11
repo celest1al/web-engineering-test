@@ -11,14 +11,12 @@ interface IUseRandomUserProps {
   page: number
   keyword: string
   gender: TGender
-  sort: ISort
 }
 
 export function useRandomUser({
   page,
   keyword,
   gender,
-  sort,
 }: IUseRandomUserProps) {
   return useQuery(
     [
@@ -45,9 +43,8 @@ export function useUserList() {
   const delayedKeyword = useDebounce({ value: keyword, delay: 500 })
   const { data } = useRandomUser({
     page: page,
-    keyword: delayedKeyword,
+    keyword: String(delayedKeyword),
     gender: gender,
-    sort,
   })
   const paginationRange = usePagination({
     currentPage: page,
