@@ -34,6 +34,12 @@ npm run dev
 
 # or
 yarn run dev
+
+# run linter
+pnpm lint
+
+# run unit test
+pnpm test
 ```
 
 # Architecture
